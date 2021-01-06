@@ -15,7 +15,7 @@ services:
     - .:/code
     - $HOME/.nuget:/root/.nuget
     working_dir: /code
-    command: dotnet test --filter 'Category==Integration' -v normal
+    command: dotnet test --filter 'Category=Integration' -v normal
 
 
 
