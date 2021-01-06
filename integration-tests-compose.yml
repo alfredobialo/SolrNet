@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  solr:
+    image: openjdk:11-jre
+    volumes:
+    - ./solr:/solr
+    working_dir: /solr
+    command: java -jar start.jar
+  integration_tests:
+    image: mcr.microsoft.com/dotnet/sdk:5.0-alpine
+    depends_on:
+    - solr
+    volumes:
+    - .:/code
+    - $HOME/.nuget:/root/.nuget
+    working_dir: /code
+    command: dotnet test --filter 'Category==Integration' -v normal
+
+
+
